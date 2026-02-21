@@ -1,0 +1,39 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local env & secrets
+.env
+.env.*
+
+# Runtime data
+image_data.db
+*.sqlite
+*.sqlite3
+
+# Project local config (contains api key/cookie)
+config/config.json
+
+# Do not upload any resource files
+resource/

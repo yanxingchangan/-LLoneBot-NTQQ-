@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek API 配置</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .section-title {
+            font-size: 1.2em;
+            color: #444;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #4CAF50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DeepSeek API 配置</h1>
+        
+        {% if request.query_params.get('saved') %}
+        <div class="alert alert-success">
+            配置已成功保存！
+        </div>
+        {% endif %}
+        
+        <form method="post" action="/save-config">
+            <div class="section">
+                <div class="section-title">API 配置</div>
+                
+                <div class="form-group">
+                    <label for="api_key">API 密钥</label>
+                    <input type="text" id="api_key" name="api_key" value="{{ config.api.api_key }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="api_endpoint">API 端点 (余额查询)</label>
+                    <input type="text" id="api_endpoint" name="api_endpoint" value="{{ config.api.api_endpoint }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="chat_endpoint">聊天端点</label>
+                    <input type="text" id="chat_endpoint" name="chat_endpoint" value="{{ config.api.chat_endpoint }}" required>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">系统配置</div>
+                
+                <div class="form-group">
+                    <label for="admin_id">管理员 ID</label>
+                    <input type="text" id="admin_id" name="admin_id" value="{{ config.system.admin_id }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bot_id">机器人 ID</label>
+                    <input type="text" id="bot_id" name="bot_id" value="{{ config.system.bot_id }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="target_group_id">目标群组 ID</label>
+                    <input type="text" id="target_group_id" name="target_group_id" value="{{ config.system.target_group_id }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="admin_server">管理员服务器</label>
+                    <input type="text" id="admin_server" name="admin_server" value="{{ config.system.admin_server }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="local_server">本地服务器</label>
+                    <input type="text" id="local_server" name="local_server" value="{{ config.system.local_server }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bilibili_cookie">Bilibili Cookie</label>
+                    <input type="text" id="bilibili_cookie" name="bilibili_cookie" value="{{ config.system.bilibili_cookie }}" required>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">文件配置</div>
+                
+                <div class="form-group">
+                    <label for="history_dir">历史记录目录</label>
+                    <input type="text" id="history_dir" name="history_dir" value="{{ config.files.history_dir }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="max_duplicate_hours">最大重复小时数</label>
+                    <input type="number" id="max_duplicate_hours" name="max_duplicate_hours" value="{{ config.files.max_duplicate_hours }}" required>
+                </div>
+            </div>
+            
+            <button type="submit">保存配置</button>
+        </form>
+    </div>
+</body>
+</html>
